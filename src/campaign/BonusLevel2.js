@@ -36,7 +36,7 @@ export class BonusLevel1 extends BaseLevel
 
         this.createTileMap('grass', level);
 
-        this.loopBackground('background', 720, 420, 1.45);
+        this.loopBackground('background2', 720, 420, 1.45);
 
         this.addStaticImage('house', 100, 530);
 
@@ -45,7 +45,7 @@ export class BonusLevel1 extends BaseLevel
         new Enemy(this, 2080, 200);
 
         let sequence1 = this.dialogTree.addSequence();
-        this.dialogTree.addDialog(sequence1, "Welcome to the bonus levels. Kill Doge!!.", this.getPlayer());
+        this.dialogTree.addDialog(sequence1, ".", this.getPlayer());
         this.dialogTree.playSequence(sequence1);
     }
 
