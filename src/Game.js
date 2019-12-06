@@ -19,6 +19,7 @@ import { Level4 } from "./campaign/Level4.js";
 import { Level5 } from "./campaign/Level5.js";
 import { BonusLevel1 } from "./campaign/BonusLevel1.js";
 import { BonusLevel2 } from "./campaign/Nic's_Bonus_Level.js";
+import { BonusLevel3 } from "./campaign/BonusLevel3.js";
 
 export class Game 
 {
