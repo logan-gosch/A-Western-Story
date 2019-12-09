@@ -40,10 +40,11 @@ export class BonusLevel3 extends BaseLevel
         this.loopBackground('background', 720, 420, 1.45);
 
         this.addStaticImage('house', 100, 530);
+        // this.addStaticImage('house', 125, 530);
+        // this.addStaticImage('house', 150, 530);
+        // this.addStaticImage('house', 150, 560);
 
         this.setPlayerPosition(100, 500);
-
-        // new Brick(this, 400, 200);
 
         let sequence1 = this.dialogTree.addSequence();
         this.dialogTree.addDialog(sequence1, "Hi!", this.getPlayer());
@@ -60,14 +61,14 @@ export class BonusLevel3 extends BaseLevel
     {
         super.update();
         
-        // if (this.enemies.list.length == 0)
-        // {
-        //     this.nextLevel();
-        // }
+        if (this.enemies.list.length == 0)
+        {
+            this.nextLevel();
+        }
     }
 
-    // nextLevel()
-    // {
-    //     this.scene.start('');
-    // }
+    nextLevel()
+    {
+        this.scene.start('');
+    }
 }
