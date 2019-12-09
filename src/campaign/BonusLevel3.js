@@ -1,12 +1,12 @@
 import { BaseLevel } from "../core/BaseLevel.js";
+import { Cloud } from "../statics/Cloud.js";
 import { Enemy } from "../entities/Enemy.js";
-import { Brick } from "../entities/Brick.js";
 
-export class BonusLevel1 extends BaseLevel
+export class BonusLevel3 extends BaseLevel
 {
     constructor(phaserGame)
     {
-        super(phaserGame, "bonuslevel-1");
+        super(phaserGame, "bonuslevel-3");
     }
 
     create()
@@ -35,7 +35,7 @@ export class BonusLevel1 extends BaseLevel
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ];
 
-        this.createTileMap('cracked-brick', level);
+        this.createTileMap('grass', level);
 
         this.loopBackground('background', 720, 420, 1.45);
 
@@ -43,26 +43,31 @@ export class BonusLevel1 extends BaseLevel
 
         this.setPlayerPosition(100, 500);
 
-        new Brick(this, 400, 200);
+        // new Brick(this, 400, 200);
 
         let sequence1 = this.dialogTree.addSequence();
-
-        this.dialogTree.addDialog(sequence1, "Welcome to the bonus levels. Kill Doge!!.", this.getPlayer());
+        this.dialogTree.addDialog(sequence1, "Hi!", this.getPlayer());
         this.dialogTree.playSequence(sequence1);
+
+        //Adding cloods
+        for(var i = 0; i < 15; i++)
+        {
+            new Cloud(this, Math.floor(Math.random() * (level[0].length * 32)), Math.floor((Math.random() * (level.length * 16)) + 32), level[0].length * 32);
+        }
     }
 
     update()
     {
         super.update();
         
-        if (this.enemies.list.length == 0)
-        {
-            this.nextLevel();
-        }
+        // if (this.enemies.list.length == 0)
+        // {
+        //     this.nextLevel();
+        // }
     }
 
-    nextLevel()
-    {
-        this.scene.start('level-1.2');
-    }
+    // nextLevel()
+    // {
+    //     this.scene.start('');
+    // }
 }
