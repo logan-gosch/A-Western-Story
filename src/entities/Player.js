@@ -19,7 +19,7 @@ export class Player extends Phaser.Physics.Matter.Sprite
             maxVelocityX: 3,
             maxVelocityY: 9,
             moveForce: 0.01,
-            nodamage: false,
+            damageFlag: true, //true means player is going to take damage.
             isTouching: { left: false, right: false, down: false },
             canJump: true,
             numOfBullets: 1,
@@ -84,10 +84,10 @@ export class Player extends Phaser.Physics.Matter.Sprite
 
         //Creating Health Display
         this.healthSprite = scene.add.sprite(20, 20, 'hearts'); 
-        this.healthSprite.setFrame(0).setScrollFactor(0, 0).setDepth(0);
+        this.healthSprite.setFrame(0).setScrollFactor(0, 0).setDepth(1);
 
         this.displayHealth = scene.add.text(30, 12, this.status.health, {color:'#BB002A'});
-        this.displayHealth.setScrollFactor(0, 0).setDepth(0);
+        this.displayHealth.setScrollFactor(0, 0).setDepth(1);
 
         this.gun = scene.add.image(this.x, this.y, 'gun');
         this.gun.setDepth(1).setScale(2);
@@ -103,7 +103,7 @@ export class Player extends Phaser.Physics.Matter.Sprite
 
         this.controller.updateGun();
         
-        if (this.y > 600)
+        if (this.y > this.scene.map.level.length * 32)
         {
             this.death();
         }
@@ -138,11 +138,11 @@ export class Player extends Phaser.Physics.Matter.Sprite
     changeHealth(changeHealthBy)
     {
         this.status.health += changeHealthBy;
-        if (changeHealthBy < 0 && this.status.nodamage)
+        if (changeHealthBy < 0 && !this.status.damageFlag)
         {
             this.status.health -= changeHealthBy;
         }
-        if (changeHealthBy < 0 && !this.status.nodamage)
+        if (changeHealthBy < 0 && this.status.damageFlag)
         {
             this.damagedEffects();
         }
@@ -179,13 +179,13 @@ export class Player extends Phaser.Physics.Matter.Sprite
     damagedEffects()
     {
         this.alpha = .5;
-        this.status.nodamage = true;
+        this.status.damageFlag = false;
         let timer = this.scene.time.addEvent({
             delay: 1000,
             callback: () => 
             {
                 this.alpha = 1;
-                this.status.nodamage = false;
+                this.status.damageFlag = true;
             },
             callbackScope: this,
             loop: false
